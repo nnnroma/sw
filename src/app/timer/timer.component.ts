@@ -31,70 +31,41 @@ export class TimerComponent implements OnInit {
   condition = 'Start';
 
   startTimer() {
-
-    // if(this.isWork === false) {
+    if(this.isWork === false) {
       this.time = this.myTimer.subscribe(() => {
       this.seconds++
       this.date.setHours(this.hours, this.minuts, this.seconds);
-      // this.isWork = true
-      // this.condition = 'STOP'
+      this.isWork = true
+      this.condition = 'Res'
     });
-    // }
-    // else {
-    //   this.time.unsubscribe();
-    //   // this.date.setHours(this.hours = 0, this.minuts = 0, this.seconds = 0);
-    //   this.isWork = false;
-    //   this.condition = 'Start'
-    // }
-
-
-
-
-
-
-    // if(this.isClick === true) {
-    //   this.date.setHours(this.hours, this.minuts, this.seconds);
-    //   this.time.unsubscribe();
-    //   if(this.dblClick === true) {
-    //     this.time = this.myTimer.subscribe(() => {
-    //       // this.seconds++
-    //       this.startTimer()
-    //       this.date.setHours(this.hours, this.minuts, this.seconds);
-    //       this.dblClick = false
-    //     })
-    //   }
-    //   this.dblClick = true;
-    // }
-
-    // this.isClick = true;
-    // timer(300).subscribe(()=> {
-    //   this.isClick = false;
-    // })
-
-
+    } else {
+      this.seconds = this.seconds;
+      this.date.setHours(this.hours = 0, this.minuts = 0, this.seconds = 0);
+      this.condition = 'Start';
+      this.isWork = false;
+      this.time.unsubscribe()
+    }
   }
 
   isClick = false;
   dblClick = false;
 
-  pauseTime() {
 
-    // if(this.dblClick === true) {
-    //   this.time = this.myTimer.subscribe(() => {
-    //     this.seconds++
-    //     this.date.setHours(this.hours, this.minuts, this.seconds);
-    //     this.dblClick = false
-    //   })
-    // } 
+  pauseText = 'Pause';
+
+  pauseTime() {
     if(this.isClick === true) {
       this.date.setHours(this.hours, this.minuts, this.seconds);
       this.time.unsubscribe();
+      this.pauseText = 'Play';
+      
       
       if(this.dblClick === true) {
         this.time = this.myTimer.subscribe(() => {
           this.seconds++
           this.date.setHours(this.hours, this.minuts, this.seconds);
-          this.dblClick = false
+          this.dblClick = false;
+          this.pauseText = 'Pause';
         })
       }
       this.dblClick = true;
@@ -104,14 +75,6 @@ export class TimerComponent implements OnInit {
     timer(300).subscribe(()=> {
       this.isClick = false;
     })
-
-
-
-
-
-    // fromEvent(this, 'click') {
-
-    // }
   }
 
 
